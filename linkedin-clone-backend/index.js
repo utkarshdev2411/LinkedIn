@@ -14,15 +14,25 @@ const notificationRoutes = require("./routes/notificationRoutes");
 const connectionRoutes = require("./routes/connectionRoutes");
 require("dotenv").config();
 
-// backend and frontend connection
-if (process.env.NODE_ENV !== "production") {
-  app.use(
-    cors({
-      origin: process.env.CLIENT_URL,
-      credentials: true, // Enable cookies for cross-origin requests
-    })
-  );
-}
+// Allowed Origins for CORS
+const allowedOrigins = [
+  process.env.CLIENT_URL, // Frontend URL for development
+  "https://linkedin-clone-bqrd.onrender.com", // Frontend production URL
+];
+
+// CORS Middleware
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, // Allow cookies for cross-origin requests
+  })
+);
 
 // Middlewares
 app.use(express.json({ limit: "10mb" }));
@@ -46,7 +56,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
-    cookie: { secure: false, httpOnly: true }, // Set 'secure: true' in production
+    cookie: { secure: process.env.NODE_ENV === "production", httpOnly: true }, // Secure cookies in production
   })
 );
 
