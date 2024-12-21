@@ -11,7 +11,7 @@ import { Navbar2 } from "./components/layout/Navbar2";
 import { NotificationsPage } from "./pages/NotificationsPage";
 import { NetworkPage } from "./pages/NetworkPage";
 import { PostPage } from "./pages/PostPage";
-import { Profilepage } from "./pages/Profilepage";
+import { Profilepage } from "./pages/ProfilePage";
 function App() {
 
   const { data: authUser, isLoading } = useQuery({
