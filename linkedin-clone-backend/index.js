@@ -14,23 +14,12 @@ const notificationRoutes = require("./routes/notificationRoutes");
 const connectionRoutes = require("./routes/connectionRoutes");
 require("dotenv").config();
 
-// Allowed Origins for CORS
-const allowedOrigins = [
-  process.env.CLIENT_URL, // Frontend URL for development
-  "https://linkedin-clone-bqrd.onrender.com", // Frontend production URL
-];
 
 // CORS Middleware
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true, // Allow cookies for cross-origin requests
+    origin: "https://linkedin-clone-mtfl.onrender.com/",
+    credentials: true
   })
 );
 
