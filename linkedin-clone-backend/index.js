@@ -18,7 +18,7 @@ require("dotenv").config();
 // CORS Middleware
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: "https://linkedin-clone-mtfl.onrender.com",
     credentials: true
   })
 );
