@@ -1,6 +1,6 @@
 import axios from "axios"
 
 export const axiosInstance  = axios.create({
-    baseURL: "https://linkedin-backend-ivjp.onrender.com",
+    baseURL: "https://linkedin-1-5nsp.onrender.com/",
     withCredentials: true
 })
