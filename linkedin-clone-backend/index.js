@@ -18,20 +18,28 @@ require("dotenv").config();
 // CORS Middleware
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (origin && origin.startsWith("https://linked-in-virid-eight.vercel.app")) {
+    origin: (origin, callback) => {
+      const allowedOrigins = ["https://linked-in-virid-eight.vercel.app"]; // Add allowed frontend URLs here
+      if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
       }
     },
-    credentials: true
+    credentials: true, // Enable credentials for cookies or authorization headers
   })
 );
+
 // Middlewares
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginEmbedderPolicy: false,
+    contentSecurityPolicy: false,
+  })
+);
+
 
 // Database Connection
 mongoose
