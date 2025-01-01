@@ -1,7 +1,9 @@
+
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const dotenv = require("dotenv");
 dotenv.config();
+
 module.exports = async function (req, res, next) {
   const token = req.cookies?.token || req.headers.authorization?.split(" ")[1];
 
@@ -27,8 +29,7 @@ module.exports = async function (req, res, next) {
     } else if (err.name === "JsonWebTokenError") {
       return res.status(401).json({ message: "Invalid token. Please log in again." });
     } else {
-    res.status(500).json({ message: "Something went wrong. Please try again." });    
+      res.status(500).json({ message: "Something went wrong. Please try again." });
     }
-
   }
 };
