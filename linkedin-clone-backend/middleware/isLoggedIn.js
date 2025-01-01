@@ -1,4 +1,3 @@
-
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const dotenv = require("dotenv");
@@ -9,6 +8,10 @@ module.exports = async function (req, res, next) {
 
   if (!token) {
     return res.status(401).json({ message: "You need to login first" });
+  }
+
+  if (!process.env.JWT_KEY) {
+    return res.status(500).json({ message: "JWT key is not defined in environment variables" });
   }
 
   try {
