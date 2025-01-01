@@ -18,7 +18,7 @@ require("dotenv").config();
 // CORS Middleware
 app.use(
   cors({
-    origin: "https://linked-in-virid-eight.vercel.app",
+    origin: "https://linked-in-virid-eight.vercel.app/signup",
     credentials: true
   })
 );
