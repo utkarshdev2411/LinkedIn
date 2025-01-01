@@ -50,6 +50,10 @@ app.use(
 );
 
 // Routes
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to LinkedIn Clone API" });
+}
+);
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
