@@ -32,7 +32,7 @@ module.exports = async function (req, res, next) {
     } else if (err.name === "JsonWebTokenError") {
       return res.status(401).json({ message: "Invalid token. Please log in again." });
     } else {
-      res.status(500).json({ message: "Something went wrong. Please try again." });
+      return res.status(500).json({ message: "Something went wrong. Please try again." });
     }
   }
 };
