@@ -12,7 +12,7 @@ export const LoginForm = () => {
   const navigate = useNavigate();
   
   const { mutate: loginMutation, isLoading } = useMutation({
-    mutationFn: (userData) => axiosInstance.post("/login", userData),
+    mutationFn: (userData) => axiosInstance.post("/auth/login", userData),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["authUser"],
