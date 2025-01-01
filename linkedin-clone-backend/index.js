@@ -18,11 +18,16 @@ require("dotenv").config();
 // CORS Middleware
 app.use(
   cors({
-    origin: "https://linked-in-virid-eight.vercel.app/signup",
+    origin: function (origin, callback) {
+      if (origin && origin.startsWith("https://linked-in-virid-eight.vercel.app")) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true
   })
 );
-
 // Middlewares
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
